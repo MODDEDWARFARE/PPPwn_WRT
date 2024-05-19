@@ -12,7 +12,7 @@ chmod +x run.sh
 chmod +x kill.sh
 
 #Add custom command in LuCi
-echo -e "\nconfig command\n    option name 'PPPwn PS4'\n    option command '/root/PPPwn_WRT/run.sh'" | tee -a /etc/config/luci > /dev/null
+echo -e "\nconfig command\n    option name 'PPPwn PS4'\n    option command '/root/PPPwn_WRT-main/run.sh'" | tee -a /etc/config/luci > /dev/null
 echo
 
 #Select Interface
@@ -36,7 +36,7 @@ fi
 echo
 read -p "Do you want to run PPPwn on startup? (Y/N): " run_on_startup
 if [ "$run_on_startup" = "Y" ] || [ "$run_on_startup" = "y" ]; then
-    echo "cd /root/PPPwn_WRT && ./run.sh" > /etc/rc.local
+    echo "cd /root/PPPwn_WRT-main && ./run.sh" > /etc/rc.local
 fi
 echo
 echo "Install complete. Run it with ./run.sh"

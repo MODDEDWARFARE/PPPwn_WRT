@@ -23,8 +23,10 @@ Download the project to your router:
 
 ```sh
 opkg update
-wget https://github.com/MODDEDWARFARE/PPPwn_WRT.git
-cd PPPwn_WRT
+opkg install unzip
+wget https://github.com/MODDEDWARFARE/PPPwn_WRT/archive/main.zip
+unzip main
+cd PPPwn_WRT-main
 chmod +x install.sh && ./install.sh
 ```
 

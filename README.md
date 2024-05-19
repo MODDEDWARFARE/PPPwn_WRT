@@ -61,7 +61,7 @@ This method is a bit more involved than the previous one.
 6. Delete everything inside the `if` statement and replace it with the following command:
    
     ```sh
-    cd /root/PPPwn_WRT && ./run.sh
+    cd /root/PPPwn_WRT-main && ./run.sh
     ```
 
    Example:
@@ -78,7 +78,7 @@ If your router has LED indicators for `wps`, `power`, `wlan`, etc., you can use 
 3. Edit the script to change the LED behavior:
 
     ```sh
-    nano /root/PPPwn_WRT/run.sh
+    nano /root/PPPwn_WRT-main/run.sh
     ```
 
 4. Replace `green:wps` with `red:info` in:

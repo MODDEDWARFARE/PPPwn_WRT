@@ -24,8 +24,8 @@ Download the project to your router:
 ```sh
 opkg update
 opkg install unzip
-wget https://github.com/MODDEDWARFARE/PPPwn_WRT/archive/main.zip
-unzip main
+wget -O main.zip https://github.com/MODDEDWARFARE/PPPwn_WRT/archive/refs/heads/main.zip
+unzip main.zip
 cd PPPwn_WRT-main
 chmod +x install.sh && ./install.sh
 ```

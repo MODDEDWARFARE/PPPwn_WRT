@@ -3,6 +3,18 @@
 interface=$(sed -n '1p' /root/PPPwn_WRT-main/settings.cfg)
 firmware=$(sed -n '2p' /root/PPPwn_WRT-main/settings.cfg)
 
+# Disable WAN and WAN6 interface
+ifdown wan && ifdown wan6
+# Disable WiFi interface
+uci set wireless.radio0.disabled=1
+uci set wireless.radio1.disabled=1
+# Commit changes
+uci commit wireless
+# reload WiFI config				
+wifi reload
+# Commit changes
+/etc/init.d/network reload
+
 # capture the output of uname -m
 machine_arch=$(uname -m)
 
@@ -24,8 +36,39 @@ fi
 /root/PPPwn_WRT-main/kill.sh
 
 # Construct and execute the command with the chosen script
- echo "heartbeat" > /sys/class/leds/red:info/trigger
-/root/PPPwn_WRT-main/${script_name} --interface $interface --fw $firmware --stage1 /root/PPPwn_WRT-main/stage1_$firmware.bin --stage2 /root/PPPwn_WRT-main/stage2_$firmware.bin --auto-retry 
+echo "heartbeat" > /sys/class/leds/red:info/trigger
+pppwn_ps4_run () {
+	./${script_name} --interface $interface --fw $firmware --stage1 "stage1_$firmware.bin" --stage2 "stage2_$firmware.bin" --auto-retry
+}
+if pppwn_ps4_run; then 
+	# Enable WAN and WAN6 interface
+	ifup wan && ifup wan6
+	# Enable WiFi interface
+	uci set wireless.radio0.disabled=0
+	uci set wireless.radio1.disabled=0
+	# Commit changes
+	uci commit wireless
+	# reload WiFI config				
+	wifi reload
+	# Commit changes
+	/etc/init.d/network reload
+	echo "[DISABLED] INTERFACE WAN & WAN6 & WIFI"
+	echo "YOU HAVEN'T ACCESS TO INTERNET"
+else
+	# Disable WAN and WAN6 interface
+	ifdown wan && ifdown wan6
+	# Disable WiFi interface
+	uci set wireless.radio0.disabled=1
+	uci set wireless.radio1.disabled=1
+	# Commit changes
+	uci commit wireless
+	# reload WiFI config				
+	wifi reload
+	# Commit changes
+	/etc/init.d/network reload
+	echo "[ENABLED] INTERFACE WAN & WAN6 & WIFI"
+	echo "YOU HAVE GRANTED ACCESS TO INTERNET"
+	echo
+fi
 echo "none" > /sys/class/leds/red:info/trigger
 echo "default-on" > /sys/class/leds/green:info/trigger
-

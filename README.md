@@ -61,7 +61,13 @@ This method is a bit more involved than the previous one.
 6. Delete everything inside the `if` statement and replace it with the following command:
    
     ```sh
-    cd /root/PPPwn_WRT-main && ./run.sh
+   if [ "$ACTION" = "released" ] && [ "$BUTTON" = "wps" ]; then
+      if [ "$SEEN" -ge 3 ] ; then
+         cd /root/PPPwn_WRT-main && ./kill.sh
+      else
+         cd /root/PPPwn_WRT-main && ./run.sh
+      fi
+   fi
     ```
 
    Example:

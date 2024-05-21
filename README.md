@@ -38,7 +38,7 @@ You will be asked if you want to load the script on startup. If you select `Y` f
 
 You can now run the script from the terminal by entering `./run.sh` or run it from the LuCI web interface by going to **System > Custom Commands > PPPwn PS4 > Run**.
 
-## Using a Button to Trigger the Exploit
+## Using a Button to Trigger the Exploit (1-click WPS button to run "run.sh") or Triger the process killer (Hold 3 sec WPS button to run "kill.sh")
 
 This method is a bit more involved than the previous one.
 

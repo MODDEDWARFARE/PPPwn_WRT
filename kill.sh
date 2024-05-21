@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# KILL PPPwn++ PS4 function
+pppwn_ps4_run () {
+	return 1
+}
+
 # Disable WAN and WAN6 interface
 ifdown wan && ifdown wan6
 # Disable WiFi interface
@@ -20,6 +25,6 @@ if [ -z "$pids" ]; then
   echo "---"
 else
   # Kill each PID found
-  echo "$pids" | xargs kill
+  echo "$pids" | xargs kill -9
   echo "Killed the following PIDs: $pids"
 fi

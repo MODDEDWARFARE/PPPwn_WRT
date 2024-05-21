@@ -52,8 +52,8 @@ if pppwn_ps4_run; then
 	wifi reload
 	# Commit changes
 	/etc/init.d/network reload
-	echo "[DISABLED] INTERFACE WAN & WAN6 & WIFI"
-	echo "YOU HAVEN'T ACCESS TO INTERNET"
+	echo "[ENABLED] INTERFACE WAN & WAN6 & WIFI"
+	echo "YOU HAVE GRANTED ACCESS TO INTERNET"
 else
 	# Disable WAN and WAN6 interface
 	ifdown wan && ifdown wan6
@@ -66,8 +66,8 @@ else
 	wifi reload
 	# Commit changes
 	/etc/init.d/network reload
-	echo "[ENABLED] INTERFACE WAN & WAN6 & WIFI"
-	echo "YOU HAVE GRANTED ACCESS TO INTERNET"
+	echo "[DISABLED] INTERFACE WAN & WAN6 & WIFI"
+	echo "YOU HAVEN'T ACCESS TO INTERNET"
 	echo
 fi
 echo "none" > /sys/class/leds/red:info/trigger

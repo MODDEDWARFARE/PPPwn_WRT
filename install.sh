@@ -1,5 +1,19 @@
 #!/bin/sh
 
+#Disable internet access
+echo "=== INSTALATION - PROGRESS 1/5 ==="
+# Disable WAN and WAN6 interface
+ifdown wan && ifdown wan6
+# Disable WiFi interface
+uci set wireless.radio0.disabled=1
+uci set wireless.radio1.disabled=1
+# Commit changes
+uci commit wireless
+# reload WiFI config				
+wifi reload
+# Commit changes
+/etc/init.d/network reload
+
 #Grab our files
 opkg install nano luci-app-commands
 

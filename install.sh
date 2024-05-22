@@ -1,7 +1,6 @@
 #!/bin/sh
 
 #Disable internet access
-echo "=== INSTALATION - PROGRESS 1/5 ==="
 # Disable WAN and WAN6 interface
 ifdown wan && ifdown wan6
 # Disable WiFi interface

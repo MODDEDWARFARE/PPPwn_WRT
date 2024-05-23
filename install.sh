@@ -38,10 +38,8 @@ get_interfaces() {
 }
 #Select Interface - Function to prompt user to select a network interface
 select_interface() {
-    echo "=== [5/6] INSTALATION 4/5 - SAVE SETTINGS ==="
     ip link
     echo
-
     while true; do
         read -p "Select your network interface (e.g., br-lan): " network_interface
         if echo "$(get_interfaces)" | grep -qw "$network_interface"; then

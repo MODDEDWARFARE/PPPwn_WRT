@@ -23,18 +23,23 @@ Download the project to your router:
 
 ```sh
 opkg update
-opkg install unzip
-wget -O main.zip https://github.com/MODDEDWARFARE/PPPwn_WRT/archive/refs/heads/main.zip
-unzip main.zip
-cd PPPwn_WRT-main
-chmod +x install.sh && ./install.sh
+wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/install.sh
+chmod +x install.sh && . ./install.sh
 ```
 
 Select your interface most common is `br-lan`.
 
-Select your firmware 11.00 or 9.00.
+Select your firmware `11.00`, `10.00` or `9.00`.
+
+You will be asked if you want to load PPPwn from the Web Interface. You should not use this option if you have limited storage space and
+are planning to load PPPwn on startup or with a button on the router.
 
 You will be asked if you want to load the script on startup. If you select `Y` for Yes you can edit this in future by editing the file: `/etc/rc.local`.
+
+You will be asked if you want to power down the router after loading the exploit. This feature may not work on some routers and could
+cause them to reboot instead. If any files do not download correctly during installation this option could also cause a boot loop.
+
+You will be asked if you want to install nano. If you have limited storage space it's best to decline this option and use vi instead.
 
 You can now run the script from the terminal by entering `./run.sh` or run it from the LuCI web interface by going to **System > Custom Commands > PPPwn PS4 > Run**.
 

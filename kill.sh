@@ -8,6 +8,6 @@ if [ -z "$pids" ]; then
   echo "---"
 else
   # Kill each PID found
-  echo "$pids" | xargs kill
+  echo "$pids" | xargs kill -9
   echo "Killed the following PIDs: $pids"
 fi

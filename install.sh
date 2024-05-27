@@ -264,8 +264,10 @@ select_shutdown_router_after_loading_exploit() {
                     if [ "$confirm_shutdown_router_after_loading_exploit_bootloop" = "yes" ] || [ "$confirm_shutdown_router_after_loading_exploit_bootloop" = "y" ]; then
                         echo "poweroff" >> run.sh
                         echo "[PPPwn-WRT][INFO] Your router will be powered down after loading the exploit"
+                        break
                     elif [ "$confirm_shutdown_router_after_loading_exploit_bootloop" = "no" ] || [ "$confirm_shutdown_router_after_loading_exploit_bootloop" = "n" ]; then
                         echo "[PPPwn-WRT][INFO] Your router will not be powered down after loading the exploit."
+                        break
                     else
                         echo "[PPPwn-WRT][ERROR] Invalid input. Please enter Y to confirm or N to decline"
                     fi
@@ -273,6 +275,7 @@ select_shutdown_router_after_loading_exploit() {
             }
             # Confirm the shutdown after loading the exploit - Call the function
             select_confirm_shutdown_router_after_loading_exploit 
+            break
         elif [ "$shutdown_router_after_loading_exploit" = "no" ] || [ "$shutdown_router_after_loading_exploit" = "n" ]; then
             echo "[PPPwn-WRT][INFO] Your router will not be power down after loading the exploit."
             break
@@ -283,6 +286,7 @@ select_shutdown_router_after_loading_exploit() {
 }
 # Shutdown after loading the exploit - Call the function
 select_shutdown_router_after_loading_exploit
+
 
 # Install nano
 # Install nano - Function to prompt user to select if PPPwn should run on startup

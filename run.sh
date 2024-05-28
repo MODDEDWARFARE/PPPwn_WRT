@@ -14,7 +14,10 @@ elif echo "$machine_arch" | grep -q "armv7"; then
 elif echo "$machine_arch" | grep -q "x86_64"; then
     script_name="pppwn_x86_64"
 elif echo "$machine_arch" | grep -q "mips"; then
-    script_name="pppwn_mips"
+    if [ -e "pppwn_mips" ]; then
+        script_name="pppwn_mips"
+    else
+        script_name="pppwn_mipsel"
 else
     echo "Unsupported architecture: $machine_arch"
     exit 1

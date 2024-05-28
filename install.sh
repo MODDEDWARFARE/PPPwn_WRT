@@ -53,12 +53,26 @@ elif echo "$machine_arch" | grep -q "x86_64"; then
     fi
     chmod +x pppwn_x86_64
 elif echo "$machine_arch" | grep -q "mips"; then
-    wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_mips
-    if [ $? -ne 0 ]; then
-        echo "Failed to download pppwn_mips"
-        exit 1
+    opkg install lscpu
+
+    # Get byte order
+    BYTE_ORDER=$(lscpu | grep "Byte Order" | awk '{print $3, $4}')
+    
+    if [ "$BYTE_ORDER" == "Big Endian" ]; then
+        wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_mips
+        if [ $? -ne 0 ]; then
+            echo "Failed to download pppwn_mips"
+            exit 1
+        fi
+        chmod +x pppwn_mips
+    else
+        wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_mipsel
+        if [ $? -ne 0 ]; then
+            echo "Failed to download pppwn_mipsel"
+            exit 1
+        fi
+        chmod +x pppwn_mipsel
     fi
-    chmod +x pppwn_mips
 else
     echo "Unsupported architecture: $machine_arch"
     exit 1

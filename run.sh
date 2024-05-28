@@ -18,6 +18,7 @@ elif echo "$machine_arch" | grep -q "mips"; then
         script_name="pppwn_mips"
     else
         script_name="pppwn_mipsel"
+    fi
 else
     echo "Unsupported architecture: $machine_arch"
     exit 1

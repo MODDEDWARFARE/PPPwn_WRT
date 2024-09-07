@@ -87,8 +87,8 @@ echo
 
 # Firmware
 echo
-read -p "Select your PS4 firmware (9.00/9.60/10.00/11.00): " firmware
-if [ "$firmware" = "11.00" ] || [ "$firmware" = "10.00" ] || [ "$firmware" = "9.00" ] || [ "$firmware" = "9.60" ]; then
+read -p "Select your PS4 firmware (9.00/9.60/10.00/10.01/10.50/10.70/10.71/11.00): " firmware
+if [ "$firmware" = "11.00" ] || [ "$firmware" = "10.01" ] || [ "$firmware" = "10.00" ] || [ "$firmware" = "9.00" ] || [ "$firmware" = "9.60" ] || [ "$firmware" = "10.50" ] || [ "$firmware" = "10.70" ] || [ "$firmware" = "10.71" ]; then
     echo ${firmware//.} >> settings.cfg
     wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/stage1_${firmware//.}.bin
     if [ $? -ne 0 ]; then

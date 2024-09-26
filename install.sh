@@ -32,26 +32,15 @@ machine_arch=$(uname -m)
 
 # Choose script based on the architecture
 if echo "$machine_arch" | grep -q "arch64"; then
-    wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_arch64
+    wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_arch64 -O pppwn
     if [ $? -ne 0 ]; then
         echo "Failed to download pppwn_arch64"
         exit 1
     fi
-    chmod +x pppwn_arch64
 elif echo "$machine_arch" | grep -q "armv7"; then
-    wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_armv7
-    if [ $? -ne 0 ]; then
-        echo "Failed to download pppwn_armv7"
-        exit 1
-    fi
-    chmod +x pppwn_armv7
+    wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_armv7 -O pppwn
 elif echo "$machine_arch" | grep -q "x86_64"; then
-    wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_x86_64
-    if [ $? -ne 0 ]; then
-        echo "Failed to download pppwn_x86_64"
-        exit 1
-    fi
-    chmod +x pppwn_x86_64
+    wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_x86_64 -O pppwn
 elif echo "$machine_arch" | grep -q "mips"; then
     opkg install lscpu
 
@@ -59,24 +48,15 @@ elif echo "$machine_arch" | grep -q "mips"; then
     BYTE_ORDER=$(lscpu | grep "Byte Order" | awk '{print $3, $4}')
     
     if [ "$BYTE_ORDER" == "Big Endian" ]; then
-        wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_mips
-        if [ $? -ne 0 ]; then
-            echo "Failed to download pppwn_mips"
-            exit 1
-        fi
-        chmod +x pppwn_mips
+        wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_mips -O pppwn
     else
-        wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_mipsel
-        if [ $? -ne 0 ]; then
-            echo "Failed to download pppwn_mipsel"
-            exit 1
-        fi
-        chmod +x pppwn_mipsel
+        wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_mipsel -O pppwn
     fi
 else
     echo "Unsupported architecture: $machine_arch"
     exit 1
 fi
+chmod +x pppwn
 
 # Select interface
 ip link
@@ -90,12 +70,14 @@ echo
 read -p "Select your PS4 firmware (9.00/9.60/10.00/10.01/10.50/10.70/10.71/11.00): " firmware
 if [ "$firmware" = "11.00" ] || [ "$firmware" = "10.01" ] || [ "$firmware" = "10.00" ] || [ "$firmware" = "9.00" ] || [ "$firmware" = "9.60" ] || [ "$firmware" = "10.50" ] || [ "$firmware" = "10.70" ] || [ "$firmware" = "10.71" ]; then
     echo ${firmware//.} >> settings.cfg
-    wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/stage1_${firmware//.}.bin
+    mkdir stage1
+    mkdir stage2
+    wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/stage1_${firmware//.}.bin -O stage1/stage1.bin
     if [ $? -ne 0 ]; then
         echo "Failed to download stage1_${firmware//.}.bin"
         exit 1
     fi
-    wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/stage2_${firmware//.}.bin
+    wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/stage2_${firmware//.}.bin -O stage2/stage2.bin
     if [ $? -ne 0 ]; then
         echo "Failed to download stage2_${firmware//.}.bin"
         exit 1

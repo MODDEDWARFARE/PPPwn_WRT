@@ -22,14 +22,21 @@ Remote into your router through SSH
 Download the project to your router:
 
 ```sh
-opkg update
+apk update
 wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/install.sh
 chmod +x install.sh && . ./install.sh
 ```
 
-Select your interface most common is `br-lan`.
+For 23.05 and below systems
+```sh
+opkg update
+wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/install23.sh
+chmod +x install23.sh && . ./install23.sh
+```
 
-Select your firmware `11.00`, `10.00` or `9.00`.
+Select your interface, most common is `br-lan`.
+
+Select your firmware `11.00`, `10.00`, `10.01`, `10.50`, `10.70`, `10.71`, `9.60`, `9.03` or `9.00`.
 
 You will be asked if you want to load PPPwn from the Web Interface. You should not use this option if you have limited storage space and
 are planning to load PPPwn on startup or with a button on the router.

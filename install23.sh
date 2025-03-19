@@ -53,7 +53,7 @@ elif echo "$machine_arch" | grep -q "x86_64"; then
     fi
     chmod +x pppwn_x86_64
 elif echo "$machine_arch" | grep -q "mips"; then
-    apk add lscpu
+    opkg install lscpu
 
     # Get byte order
     BYTE_ORDER=$(lscpu | grep "Byte Order" | awk '{print $3, $4}')
@@ -109,7 +109,7 @@ fi
 echo
 read -p "Do you want to run PPPwn from the web interface? (Y/N): " app_commands
 if [ "$app_commands" = "Y" ] || [ "$app_commands" = "y" ]; then
-    apk add luci-app-commands
+    opkg install luci-app-commands
     if [ $? -ne 0 ]; then
         echo "Failed to install luci-app-commands"
         exit 1
@@ -141,7 +141,7 @@ fi
 echo
 read -p "Do you want to install nano for editing the button config? (Y/N): " nano
 if [ "$nano" = "Y" ] || [ "$nano" = "y" ]; then
-    apk add nano
+    opkg install nano
     if [ $? -ne 0 ]; then
         echo "Failed to install nano"
         exit 1

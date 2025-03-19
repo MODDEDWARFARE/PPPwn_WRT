@@ -22,9 +22,16 @@ Remote into your router through SSH
 Download the project to your router:
 
 ```sh
-opkg update
+apk update
 wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/install.sh
 chmod +x install.sh && . ./install.sh
+```
+
+For 23.05 and below systems
+```sh
+opkg update
+wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/install23.sh
+chmod +x install23.sh && . ./install23.sh
 ```
 
 Select your interface most common is `br-lan`.

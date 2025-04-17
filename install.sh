@@ -125,19 +125,19 @@ XFNWB=true' | tee pconfig.cfg
 wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/run.sh
 if [ $? -ne 0 ]; then
     echo "Failed to download run.sh"
-    exit 1
+    #exit 1
 fi
 
 wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/kill.sh
 if [ $? -ne 0 ]; then
     echo "Failed to download kill.sh"
-    exit 1
+    #exit 1
 fi
 
 wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/dtlink.sh
 if [ $? -ne 0 ]; then
     echo "Failed to download dtlink.sh"
-    exit 1
+    #exit 1
 fi
 
 
@@ -148,7 +148,7 @@ case "$machine_arch" in
         wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_arch64
         if [ $? -ne 0 ]; then
             echo "Failed to download pppwn_arch64"
-            exit 1
+            #exit 1
         fi
         chmod +x pppwn_arch64
         ;;
@@ -156,7 +156,7 @@ case "$machine_arch" in
         wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_armv7
         if [ $? -ne 0 ]; then
             echo "Failed to download pppwn_armv7"
-            exit 1
+            #exit 1
         fi
         chmod +x pppwn_armv7
         ;;
@@ -164,7 +164,7 @@ case "$machine_arch" in
         wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_x86_64
         if [ $? -ne 0 ]; then
             echo "Failed to download pppwn_x86_64"
-            exit 1
+            #exit 1
         fi
         chmod +x pppwn_x86_64
         ;;
@@ -175,14 +175,14 @@ case "$machine_arch" in
             wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_mips
             if [ $? -ne 0 ]; then
                 echo "Failed to download pppwn_mips"
-                exit 1
+                #exit 1
             fi
             chmod +x pppwn_mips
         else
             wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/pppwn_mipsel
             if [ $? -ne 0 ]; then
                 echo "Failed to download pppwn_mipsel"
-                exit 1
+                #exit 1
             fi
             chmod +x pppwn_mipsel
         fi
@@ -222,13 +222,13 @@ while true; do
         wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/stage1_${firmware_numeric}.bin
         if [ $? -ne 0 ]; then
             echo "Failed to download stage1_${firmware_numeric}.bin"
-            exit 1
+            #exit 1
         fi
 
         wget https://github.com/MODDEDWARFARE/PPPwn_WRT/raw/main/stage2_${firmware_numeric}.bin
         if [ $? -ne 0 ]; then
             echo "Failed to download stage2_${firmware_numeric}.bin"
-            exit 1
+            #exit 1
         fi
 
         break
@@ -937,7 +937,7 @@ while true; do
             opkg install luci-app-commands
             if [ $? -ne 0 ]; then
                 echo "Failed to install luci-app-commands"
-                exit 1
+                #exit 1
             fi
             echo -e "\nconfig command\n    option name 'PPPwn PS4'\n    option command '${ppwnpath}/run.sh'" | tee -a /etc/config/luci > /dev/null
             printf '\033[32mPPPwn will be accessible from the web interface\033[0m'
@@ -1106,40 +1106,56 @@ fi
 DHCP_CONFIG="/etc/config/dhcp"
 
 NEW_ENTRIES="
-    list server '/ea.com/127.0.0.1'
-    list address '/ea.com/127.0.0.1'
-    list server '/nintendo.net/127.0.0.1'
-    list address '/nintendo.net/127.0.0.1'
-    list server '/cddbp.net/127.0.0.1'
-    list address '/cddbp.net/127.0.0.1'
-    list server '/ribob01.net/127.0.0.1'
-    list address '/ribob01.net/127.0.0.1'
-    list server '/sonyentertainmentnetwork.com/127.0.0.1'
-    list address '/sonyentertainmentnetwork.com/127.0.0.1'
-    list server '/llnwi.net/127.0.0.1'
-    list address '/llnwi.net/127.0.0.1'
-    list server '/sie-rd.com/127.0.0.1'
-    list address '/sie-rd.com/127.0.0.1'
-    list server '/scea.com/127.0.0.1'
-    list address '/scea.com/127.0.0.1'
-    list server '/llnwd.net/127.0.0.1'
-    list address '/llnwd.net/127.0.0.1'
-    list server '/edgesuite.net/127.0.0.1'
-    list address '/edgesuite.net/127.0.0.1'
-    list server '/edgekey.net/127.0.0.1'
-    list address '/edgekey.net/127.0.0.1'
-    list server '/akamaiedge.net/127.0.0.1'
-    list address '/akamaiedge.net/127.0.0.1'
-    list server '/akamai.net/127.0.0.1'
-    list address '/akamai.net/127.0.0.1'
-    list server '/akadns.net/127.0.0.1'
-    list address '/akadns.net/127.0.0.1'
-    list server '/playstation.org/127.0.0.1'
-    list address '/playstation.org/127.0.0.1'
-    list server '/playstation.net/127.0.0.1'
-    list address '/playstation.net/127.0.0.1'
-    list server '/playstation.com/127.0.0.1'
     list address '/playstation.com/127.0.0.1'
+    list address '/status.playstation.com/127.0.0.1'
+    list address '/www.playstation.com/127.0.0.1'
+    list server '/playstation.com/127.0.0.1'
+    list server '/status.playstation.com/127.0.0.1'
+    list server '/www.playstation.com/127.0.0.1'
+    list address '/playstation.net/127.0.0.1'
+    list address '/manuals.playstation.net/127.0.0.1'
+    list address '/get.net.playstation.net/127.0.0.1'
+    list address '/post.net.playstation.net/127.0.0.1'
+    list address '/ena.net.playstation.net/127.0.0.1'
+    list address '/update.net.playstation.net/127.0.0.1'
+    list address '/oss.dl.playstation.net/127.0.0.1'
+    list server '/playstation.net/127.0.0.1'
+    list server '/manuals.playstation.net/127.0.0.1'
+    list server '/get.net.playstation.net/127.0.0.1'
+    list server '/post.net.playstation.net/127.0.0.1'
+    list server '/ena.net.playstation.net/127.0.0.1'
+    list server '/update.net.playstation.net/127.0.0.1'
+    list server '/oss.dl.playstation.net/127.0.0.1'
+    list address '/djp01.ps4.update.playstation.net/127.0.0.1'
+    list address '/dus01.ps4.update.playstation.net/127.0.0.1'
+    list address '/deu01.ps4.update.playstation.net/127.0.0.1'
+    list address '/fjp01.ps4.update.playstation.net/127.0.0.1'
+    list address '/fus01.ps4.update.playstation.net/127.0.0.1'
+    list address '/feu01.ps4.update.playstation.net/127.0.0.1'
+    list address '/hjp01.ps4.update.playstation.net/127.0.0.1'
+    list address '/hus01.ps4.update.playstation.net/127.0.0.1'
+    list address '/heu01.ps4.update.playstation.net/127.0.0.1'
+    list server '/djp01.ps4.update.playstation.net/127.0.0.1'
+    list server '/dus01.ps4.update.playstation.net/127.0.0.1'
+    list server '/deu01.ps4.update.playstation.net/127.0.0.1'
+    list server '/fjp01.ps4.update.playstation.net/127.0.0.1'
+    list server '/fus01.ps4.update.playstation.net/127.0.0.1'
+    list server '/feu01.ps4.update.playstation.net/127.0.0.1'
+    list server '/hjp01.ps4.update.playstation.net/127.0.0.1'
+    list server '/hus01.ps4.update.playstation.net/127.0.0.1'
+    list server '/heu01.ps4.update.playstation.net/127.0.0.1'
+    list address '/b0.ww.np.dl.playstation.net/127.0.0.1'
+    list address '/gs.ww.np.dl.playstation.net/127.0.0.1'
+    list address '/gs2.ww.prod.dl.playstation.net/127.0.0.1'
+    list address '/gst.prod.dl.playstation.net/127.0.0.1'
+    list server '/b0.ww.np.dl.playstation.net/127.0.0.1'
+    list server '/gs.ww.np.dl.playstation.net/127.0.0.1'
+    list server '/gs2.ww.prod.dl.playstation.net/127.0.0.1'
+    list server '/gst.prod.dl.playstation.net/127.0.0.1'
+    list address '/sonycoment.vo.llnwd.net/127.0.0.1'
+    list address '/sonygst.s.llnwi.net/127.0.0.1'
+    list server '/sonycoment.vo.llnwd.net/127.0.0.1'
+    list server '/sonygst.s.llnwi.net/127.0.0.1'
     list address '/pppwn.local/${gateway}'
     list address '/ps4.local/${ps4ip}'
 "
